@@ -7,8 +7,8 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
+import 'animate.css';
 import { CartProvider } from './context/CartContext';
-import Cart from './components/Cart';
 
 const roboto = Roboto({ weight: ['400', '700'], subsets: ['latin'] });
 export const metadata: Metadata = {
@@ -29,7 +29,6 @@ export default function RootLayout({
                         <Header />
                         <main className="py-10">{children}</main>
                         <Footer />
-                        <Cart />
                         <ToastContainer position="top-center" autoClose={1500} />
                     </body>
                 </html>

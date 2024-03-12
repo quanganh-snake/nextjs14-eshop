@@ -5,7 +5,8 @@ import { useUser } from '@clerk/nextjs';
 
 interface CartContextValue {
     cartItems: any[];
-    addToCart: (item: any[]) => void;
+    setCartItems: (p: any[]) => void;
+    addToCart: (item: any) => void;
     removeFromCart: (id: number) => void;
 }
 
@@ -16,11 +17,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const { user } = useUser();
 
     const getCartItems = () => {
+        let listProducts = [];
         cartApi
             .getDataCartByUser(user?.primaryEmailAddress?.emailAddress.toString())
-            .then((res) => {
-                const dataCart = res.data.data;
-                setCartItems([...cartItems, ...dataCart]);
+            .then(async (res) => {
+                listProducts = await res.data.data;
+                if (listProducts) {
+                    listProducts?.forEach((p: any) => {
+                        setCartItems([
+                            ...cartItems,
+                            {
+                                id: p.id,
+                                product: p.attributes.products.data[0],
+                            },
+                        ]);
+                    });
+                }
             });
     };
     const addToCart = (item: any) => {
@@ -33,6 +45,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const value = {
         cartItems,
+        setCartItems,
         addToCart,
         removeFromCart,
     };

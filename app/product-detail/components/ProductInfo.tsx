@@ -9,10 +9,10 @@ import { useRouter } from 'next/navigation';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { toast } from 'react-toastify';
-export const ProductInfo = ({ product }: { product: IProduct | null }) => {
+export const ProductInfo = ({ product }: any) => {
     const { user } = useUser();
     const router = useRouter();
-    const { addToCart } = useCartContext();
+    const { cartItems, addToCart } = useCartContext();
 
     const handleAddToCart = () => {
         if (!user) {
@@ -23,14 +23,13 @@ export const ProductInfo = ({ product }: { product: IProduct | null }) => {
                 data: {
                     userName: user.fullName,
                     email: user.primaryEmailAddress?.emailAddress,
-                    products: product?.id,
+                    products: [product?.id],
                 },
             };
 
             addToCart({
-                id: Number(product?.id),
-                name: product?.attributes.title,
-                price: product?.attributes.pricing,
+                id: product.id,
+                product: product,
             });
 
             cartApi.addToCart(data).then(
