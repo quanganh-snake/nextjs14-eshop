@@ -3,7 +3,7 @@ export interface IProduct {
     attributes: {
         title: string;
         category: string;
-        desc: string;
+        desc: any;
         thumbnail: {
             data: {
                 id: number;

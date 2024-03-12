@@ -24,3 +24,10 @@ body {
         text-wrap: balance;
     }
 }
+
+/* Hidden Logo Clerk */
+
+/* Hidden For Component: <UserButton/> */
+.cl-userButtonPopoverFooter {
+    display: none;
+}

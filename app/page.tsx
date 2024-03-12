@@ -1,12 +1,11 @@
-import Image from 'next/image';
 import { Hero } from './components/hero';
 import { ProductSection } from './components/ProductSection';
 
 export default function Home() {
     return (
         <main className="">
+            {/* Hero */}
             <Hero />
-
             {/* Lastest Product Section */}
             <ProductSection title="Latest Product" />
             {/* Project Source Code Section */}
